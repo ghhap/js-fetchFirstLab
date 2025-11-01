@@ -1,16 +1,25 @@
-"Ваш код повинен зробити POST-запит до вказаного URL."
-"Для створення нового користувача, передайте в запит наступні дані:"
-"name: ваше ім’я"
-"email: ваш email"
-"Поверніть відповідь від сервера після створення користувача."
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
-"https://jsonplaceholder.typicode.com/users - адреса куди робити запит"
+async function createUser(user) {
+  const payload = {
+    name: user?.name,
+    email: user?.email,
+  };
 
+  const res = await fetch(USERS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify(payload),
+  });
 
-function createUser(user) {
-  // Ваш код
+  if (!res.ok) {
+    throw new Error(`Request failed with status ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data;
 }
-
-console.log(createUser({name: "Sam", email: "fjsnfkjns2342@gmail.com"}))
 
 module.exports = createUser;

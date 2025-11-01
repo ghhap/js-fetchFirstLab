@@ -1,13 +1,13 @@
-"Ваша функція повинна робити GET-запит до вказаного URL і отримати дані."
-"Поверніть дані користувачів у форматі масиву"
-"Дані мають включати такі поля, як id та name."
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
-"https://jsonplaceholder.typicode.com/users - адреса куди робити запит"
+async function fetchUsers() {
+  const res = await fetch(USERS_URL);
+  if (!res.ok) {
+    throw new Error(`Request failed with status ${res.status}`);
+  }
+  const data = await res.json();
 
-function fetchUsers() {
-  // Ваш код
+  return data; 
 }
-
-console.log(fetchUsers())
 
 module.exports = fetchUsers;
